@@ -22,7 +22,7 @@ class JsonToolkitComponent(CustomComponent):
 
     def build(self, path: str) -> JsonToolkit:
         if path.endswith("yaml") or path.endswith("yml"):
-            yaml_dict = yaml.load(open(path, "r"), Loader=yaml.FullLoader)
+            yaml_dict = yaml.load(open(path, "r"), Loader=yaml.SafeLoader)
             spec = JsonSpec(dict_=yaml_dict)
         else:
             spec = JsonSpec.from_file(Path(path))
