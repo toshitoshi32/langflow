@@ -21,7 +21,7 @@ class OpenAPIToolkitComponent(CustomComponent):
 
     def build(self, llm: BaseLanguageModel, path: str, allow_dangerous_requests: bool = False) -> BaseToolkit:
         if path.endswith("yaml") or path.endswith("yml"):
-            yaml_dict = yaml.load(open(path, "r"), Loader=yaml.FullLoader)
+            yaml_dict = yaml.load(open(path, "r"), Loader=yaml.SafeLoader)
             spec = JsonSpec(dict_=yaml_dict)
         else:
             spec = JsonSpec.from_file(Path(path))
